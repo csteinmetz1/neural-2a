@@ -23,7 +23,7 @@ endif()
 option(UniversalBinary "Build universal binary for mac" OFF)
 
 if (UniversalBinary)
-    set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE INTERNAL "")
+    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE INTERNAL "") # add in amd64 if you want to target M1 too
 endif()
 
 #static linking in Windows
@@ -51,11 +51,10 @@ add_subdirectory(Modules)
 
 if (${BUILD_JUCE_PROTOTYPE_EXAMPLES})
     #adding project folders:
-    add_subdirectory(Apps)
-    add_subdirectory(Plugins)
+    add_subdirectory(Plugin)
 endif()
 
-option(BUILD_UNIT_TESTS "Build JUCE prototype examples" ON)
+option(BUILD_UNIT_TESTS "Build JUCE prototype examples" OFF)
 
 if (BUILD_UNIT_TESTS)
     enable_testing()

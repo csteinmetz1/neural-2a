@@ -5,6 +5,12 @@ SDKs
 build
 build-ios
 
+libtorch
+libtorch-arm64
+env
+pytorch
+pytorch-build
+
 cmake-build-debug
 cmake-build-release
 CMakeFiles

@@ -1,3 +1,40 @@
+# Neural-2A
+
+## Build 
+
+This will create a build for x86_64 only since libtorch provides binaries for this arch only.
+
+```
+cmake -G Xcode -B build -DCMAKE_PREFIX_PATH=/Users/cjstein/Code/neural-2a/libtorch
+cd build
+cmake --build . --config Release
+```
+
+### M1 Mac
+
+On M1 Mac we have to build libtorch from source.
+
+```
+git clone -b master --recurse-submodule https://github.com/pytorch/pytorch.git
+python3 -m venv env
+source env/bin/activate
+cd pytorch
+pip install -r requirements.txt
+cd ..
+mkdir pytorch-build
+mkdir libtorch
+cd pytorch-build
+cmake -DBUILD_SHARED_LIBS:BOOL=ON -DCMAKE_BUILD_TYPE:STRING=Release -DPYTHON_EXECUTABLE:PATH=`whence -c python` -DCMAKE_INSTALL_PREFIX:PATH=../pytorch-install ../pytorch
+cmake --build . --target install 
+mv bin ../libtorch/
+mv include ../libtorch/
+mv lib ../libtorch/
+mv share ../libtorch/
+```
+Notes
+- Use `-DPYTHON_EXECUTABLE:PATH=`whence -c python` on zsh or `-DPYTHON_EXECUTABLE:PATH=`which python` on bash.
+
+
 # JUCE CMake Repo Prototype
 A prototype to model a way to create an entire repo using JUCE 6 and CMake.
 
